@@ -1,0 +1,29 @@
+Simple example of class demonstrating a number of Ruby techniques including
+
+* read/write files
+* YAML
+* inheritance
+* writing classes
+* KISS
+
+== Example Usage ==
+
+require 'phash'
+
+class Products < Database
+end
+
+products = Products.new
+
+products[:product_1]
+# => Hash
+
+products.delete(:product_1)
+
+products.each do | name, attributes |
+	puts name
+	puts attributes.inspect
+end
+
+
+== This is used as a teaching example in the Impartica IT Training RubyOnRails Course ==
