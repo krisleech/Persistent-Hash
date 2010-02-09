@@ -1,10 +1,18 @@
-Simple example of class demonstrating a number of Ruby techniques including
+A Persistent Hash
+
+A Hash is a very powerful class in Ruby and can be quickly turned in to a rudimentary database with full CRUD and search capabilities. 
+
+This simple class example demonstrates a number of Ruby techniques including:
 
 * read/write files
 * YAML
 * inheritance
 * writing classes
-* KISS
+* super
+* KISS 
+* CoC (Convention Over Configuration)
+* blocks
+* method chaining
 
 == Example Usage ==
 
@@ -13,17 +21,36 @@ require 'phash'
 class Products < Database
 end
 
+# Create a new database, or load an existing database
 products = Products.new
 
-products[:product_1]
+# FIND A RECORD
+
+products[:blue_widget]
 # => Hash
 
-products.delete(:product_1)
+# ITERATE THROUGH ALL RECORDS
 
 products.each do | name, attributes |
 	puts name
 	puts attributes.inspect
 end
 
+# DELETE A RECORD
+
+products.delete(:green_widget)
+
+# CREATE/UPDATE A RECORD
+
+products[:red_widget] = { :name => 'Red Widget', :size => 'large', :weight => 50, :color => 'red' }
+products.save
+
+# QUERY THE DATABASE
+
+products.select { |p| p[:weight] > 60 }.each do | product |
+  product[:size] = 'large'
+end
+
+# Note the key can be anything so long as it is unique, for example a SKU code.
 
 == This is used as a teaching example in the Impartica IT Training RubyOnRails Course ==
